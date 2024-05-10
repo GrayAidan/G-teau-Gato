@@ -347,6 +347,7 @@
 "Assets/Scripts/Player/CamFollow.cs"
 "Assets/Scripts/Player/PauseMenu.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"
+"Assets/Scripts/Projectile.cs"
 -langversion:9.0
 /deterministic
 /optimize+

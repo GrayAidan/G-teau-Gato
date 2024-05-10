@@ -13,10 +13,19 @@ public class PlayerMovement : MonoBehaviour
 
     public bool inverted = false;
 
+    public GameObject projectile;
+    public GameObject projectileInverted;
+
+    //Fire Rate
+    public float fireRate = 2f;
+    float fireRateTimer = 0f;
+    bool canFire = true;
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
@@ -28,11 +37,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CheckInput();
+        print(fireRateTimer);
+
+        if (!canFire)
+        {
+            fireRateTimer += Time.deltaTime;
+
+            if (fireRateTimer > fireRate)
+            {
+                canFire = true;
+                fireRateTimer = 0;
+            }
+        }
     }
 
     public void CheckInput()
     {
-        Vector3 movement = new Vector3(0,0,0);
+        Vector3 movement = new Vector3(0, 0, 0);
 
         if (Input.GetKey(KeyCode.Mouse1)) //flip dimension
         {
@@ -41,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (inverted == true)
         {
-            if (Input.GetKey("w")) //up
+            if (Input.GetKeyDown("w")) //up
             {
                 movement = new Vector3(movement.x, movement.y, -moveVertical);
             }
@@ -80,6 +101,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (canFire)
+            {
+                Instantiate(projectile, transform.position + (transform.forward * 0.5f), transform.rotation);
+                canFire = false;
+            }
+        }
         _rb.velocity = movement * movementSpeed;
     }
 }
