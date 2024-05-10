@@ -344,6 +344,7 @@
 "Assets/Scripts/Enemy/EnemyMovement.cs"
 "Assets/Scripts/Player/CameraFollow.cs"
 "Assets/Scripts/Player/CamFollow.cs"
+"Assets/Scripts/Player/PauseMenu.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"
 -langversion:9.0
 /deterministic
